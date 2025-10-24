@@ -1,0 +1,4 @@
+project_id = "xofphpmtvvktxgomivnx"
+
+[functions.analyze-spreadsheet]
+verify_jwt = false
