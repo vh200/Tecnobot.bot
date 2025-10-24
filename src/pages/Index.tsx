@@ -17,17 +17,20 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <header className="text-center mb-12 space-y-4">
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20">
             <BarChart3 className="h-6 w-6 text-primary" />
             <span className="text-sm font-semibold text-foreground">
               Powered by Gemini 2.5-Pro
             </span>
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-            Analista de Vendas IA
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            Tencobot Analista de Vendas
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Transforme suas planilhas de vendas em insights estratégicos com inteligência artificial
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Bot Analítico da Alpha Insights - Análise inteligente de dados de vendas mensais com IA
+          </p>
+          <p className="text-sm text-muted-foreground/80 max-w-2xl mx-auto">
+            Consulte seus dados em linguagem natural e obtenha insights imediatos sobre performance, produtos, regiões e tendências
           </p>
         </header>
 
@@ -39,7 +42,7 @@ const Index = () => {
             </div>
             <h3 className="font-semibold text-foreground mb-2">Análise de Tendências</h3>
             <p className="text-sm text-muted-foreground">
-              Identifique padrões e tendências de vendas automaticamente
+              Identifique padrões, sazonalidades e tendências em suas vendas mensais
             </p>
           </div>
           <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
@@ -48,7 +51,7 @@ const Index = () => {
             </div>
             <h3 className="font-semibold text-foreground mb-2">Insights Estratégicos</h3>
             <p className="text-sm text-muted-foreground">
-              Receba recomendações práticas e acionáveis
+              Receba relatórios e insights imediatos para focar em estratégias
             </p>
           </div>
           <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
@@ -57,7 +60,7 @@ const Index = () => {
             </div>
             <h3 className="font-semibold text-foreground mb-2">Análise Completa</h3>
             <p className="text-sm text-muted-foreground">
-              Produtos, regiões, margem de lucro e muito mais
+              Produtos, categorias, regiões, receitas e variações percentuais
             </p>
           </div>
         </div>
@@ -84,9 +87,10 @@ const Index = () => {
         </div>
 
         {/* Footer */}
-        <footer className="mt-16 text-center text-sm text-muted-foreground">
+        <footer className="mt-16 text-center text-sm text-muted-foreground space-y-2">
+          <p className="font-semibold">Alpha Insights - Tencobot Analista de Vendas</p>
           <p>
-            Análise inteligente de dados de vendas • Insights em tempo real • IA Avançada
+            Análise inteligente de dados de vendas • Insights em tempo real • Gemini 2.5-Pro
           </p>
         </footer>
       </div>

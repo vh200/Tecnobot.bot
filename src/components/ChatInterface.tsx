@@ -77,7 +77,7 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
       <div className="bg-gradient-to-r from-primary to-secondary p-4">
         <h2 className="text-xl font-bold text-white flex items-center gap-2">
           <Bot className="h-6 w-6" />
-          Chat com Especialista em Vendas
+          Tencobot - Analista de Vendas Alpha Insights
         </h2>
         {fileName && (
           <p className="text-sm text-white/80 mt-1">
@@ -104,11 +104,19 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-2xl mx-auto mt-6">
                 <div className="text-left p-3 bg-muted/50 rounded-lg">
                   <p className="text-xs font-medium text-muted-foreground">Exemplo:</p>
-                  <p className="text-sm text-foreground">"Qual produto teve mais vendas?"</p>
+                  <p className="text-sm text-foreground">"Qual produto mais vendeu no terceiro trimestre?"</p>
                 </div>
                 <div className="text-left p-3 bg-muted/50 rounded-lg">
                   <p className="text-xs font-medium text-muted-foreground">Exemplo:</p>
-                  <p className="text-sm text-foreground">"Quais regiões têm melhor margem?"</p>
+                  <p className="text-sm text-foreground">"Qual a variação de receita entre janeiro e dezembro?"</p>
+                </div>
+                <div className="text-left p-3 bg-muted/50 rounded-lg">
+                  <p className="text-xs font-medium text-muted-foreground">Exemplo:</p>
+                  <p className="text-sm text-foreground">"Quais categorias têm melhor performance?"</p>
+                </div>
+                <div className="text-left p-3 bg-muted/50 rounded-lg">
+                  <p className="text-xs font-medium text-muted-foreground">Exemplo:</p>
+                  <p className="text-sm text-foreground">"Gere um resumo executivo das vendas"</p>
                 </div>
               </div>
             </div>

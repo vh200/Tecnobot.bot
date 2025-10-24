@@ -117,7 +117,10 @@ export const FileUpload = ({ onFileUpload }: FileUploadProps) => {
                 Ou clique para selecionar um arquivo
               </p>
               <p className="text-xs text-muted-foreground">
-                Formatos suportados: CSV, XLSX, XLS
+                Formatos suportados: CSV, XLSX, XLS (dados de vendas da Alpha Insights)
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-1">
+                Estrutura esperada: Data, ID_Transacao, Produto, Categoria, Região, Quantidade, Preço_Unitário, Receita_Total
               </p>
             </div>
             <input
