@@ -11,12 +11,7 @@ interface Message {
   content: string;
 }
 
-interface ChatInterfaceProps {
-  fileContent: string | null;
-  fileName: string | null;
-}
-
-export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => {
+export const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,10 +24,7 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
   }, [messages]);
 
   const sendMessage = async () => {
-    if (!input.trim() || !fileContent) {
-      if (!fileContent) {
-        toast.error("Por favor, carregue uma planilha primeiro");
-      }
+    if (!input.trim()) {
       return;
     }
 
@@ -45,8 +37,6 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
       const { data, error } = await supabase.functions.invoke("analyze-spreadsheet", {
         body: {
           messages: [...messages, userMessage],
-          fileContent,
-          fileName,
         },
       });
 
@@ -79,11 +69,9 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
           <Bot className="h-6 w-6" />
           Tencobot - Analista de Vendas Alpha Insights
         </h2>
-        {fileName && (
-          <p className="text-sm text-white/80 mt-1">
-            Analisando: {fileName}
-          </p>
-        )}
+        <p className="text-sm text-white/80 mt-1">
+          Analisando dados de vendas integrados ao sistema
+        </p>
       </div>
 
       <ScrollArea ref={scrollRef} className="flex-1 p-6">
@@ -176,17 +164,13 @@ export const ChatInterface = ({ fileContent, fileName }: ChatInterfaceProps) => 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={
-              fileContent
-                ? "Pergunte sobre os dados da planilha..."
-                : "Carregue uma planilha para começar"
-            }
-            disabled={!fileContent || isLoading}
+            placeholder="Pergunte sobre os dados de vendas..."
+            disabled={isLoading}
             className="min-h-[60px] resize-none"
           />
           <Button
             onClick={sendMessage}
-            disabled={!input.trim() || !fileContent || isLoading}
+            disabled={!input.trim() || isLoading}
             size="icon"
             className="h-[60px] w-[60px] bg-gradient-to-br from-primary to-secondary hover:opacity-90"
           >

@@ -1,16 +1,7 @@
-import { useState } from "react";
-import { FileUpload } from "@/components/FileUpload";
 import { ChatInterface } from "@/components/ChatInterface";
-import { BarChart3, TrendingUp, Target } from "lucide-react";
+import { BarChart3, TrendingUp, Target, Database } from "lucide-react";
 
 const Index = () => {
-  const [fileContent, setFileContent] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
-
-  const handleFileUpload = (file: File, content: string) => {
-    setFileContent(content);
-    setFileName(file.name);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
@@ -38,7 +29,16 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
           <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
             <div className="inline-flex p-3 bg-primary/10 rounded-lg mb-4">
-              <TrendingUp className="h-6 w-6 text-primary" />
+              <Database className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="font-semibold text-foreground mb-2">Dados Integrados</h3>
+            <p className="text-sm text-muted-foreground">
+              Todos os dados de vendas já estão no sistema, prontos para análise instantânea
+            </p>
+          </div>
+          <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
+            <div className="inline-flex p-3 bg-secondary/10 rounded-lg mb-4">
+              <TrendingUp className="h-6 w-6 text-secondary" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">Análise de Tendências</h3>
             <p className="text-sm text-muted-foreground">
@@ -46,43 +46,20 @@ const Index = () => {
             </p>
           </div>
           <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
-            <div className="inline-flex p-3 bg-secondary/10 rounded-lg mb-4">
-              <Target className="h-6 w-6 text-secondary" />
+            <div className="inline-flex p-3 bg-accent/10 rounded-lg mb-4">
+              <Target className="h-6 w-6 text-accent" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">Insights Estratégicos</h3>
             <p className="text-sm text-muted-foreground">
-              Receba relatórios e insights imediatos para focar em estratégias
-            </p>
-          </div>
-          <div className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
-            <div className="inline-flex p-3 bg-accent/10 rounded-lg mb-4">
-              <BarChart3 className="h-6 w-6 text-accent" />
-            </div>
-            <h3 className="font-semibold text-foreground mb-2">Análise Completa</h3>
-            <p className="text-sm text-muted-foreground">
-              Produtos, categorias, regiões, receitas e variações percentuais
+              Receba relatórios e insights imediatos para focar em estratégias de vendas
             </p>
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-4">
-                1. Carregue sua Planilha
-              </h2>
-              <FileUpload onFileUpload={handleFileUpload} />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              2. Converse com o Especialista
-            </h2>
-            <div className="h-[600px]">
-              <ChatInterface fileContent={fileContent} fileName={fileName} />
-            </div>
+        {/* Main Content - Chat Full Width */}
+        <div className="max-w-6xl mx-auto">
+          <div className="h-[700px]">
+            <ChatInterface />
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,9 +12,30 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, fileContent, fileName } = await req.json();
+    const { messages } = await req.json();
     
-    console.log("Received request for file:", fileName);
+    console.log("Buscando dados de vendas do banco de dados...");
+    
+    // Criar cliente Supabase
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    // Buscar dados de vendas do banco
+    const { data: vendas, error: vendasError } = await supabase
+      .from('vendas')
+      .select('*')
+      .order('data', { ascending: true });
+    
+    if (vendasError) {
+      console.error("Erro ao buscar vendas:", vendasError);
+      throw new Error("Erro ao buscar dados de vendas do banco de dados");
+    }
+    
+    console.log(`${vendas?.length || 0} registros de vendas encontrados`);
+    
+    // Formatar dados como tabela para o contexto do Gemini
+    const fileContent = formatVendasAsTable(vendas || []);
     
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -138,3 +160,19 @@ Responda sempre em português brasileiro de forma profissional, objetiva e estra
     );
   }
 });
+
+// Função auxiliar para formatar dados de vendas como tabela
+function formatVendasAsTable(vendas: any[]): string {
+  if (!vendas || vendas.length === 0) {
+    return "Nenhum dado de vendas disponível no banco de dados.";
+  }
+  
+  let table = "Data | ID_Transacao | Produto | Categoria | Região | Quantidade | Preço_Unitário | Receita_Total | Mês | Ano\n";
+  table += "---|---|---|---|---|---|---|---|---|---\n";
+  
+  vendas.forEach(v => {
+    table += `${v.data} | ${v.id_transacao} | ${v.produto} | ${v.categoria} | ${v.regiao} | ${v.quantidade} | R$ ${v.preco_unitario} | R$ ${v.receita_total} | ${v.mes} | ${v.ano}\n`;
+  });
+  
+  return table;
+}

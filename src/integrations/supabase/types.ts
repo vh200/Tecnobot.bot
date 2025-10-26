@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      vendas: {
+        Row: {
+          ano: number
+          categoria: string
+          created_at: string
+          data: string
+          id: string
+          id_transacao: string
+          mes: number
+          preco_unitario: number
+          produto: string
+          quantidade: number
+          receita_total: number
+          regiao: string
+        }
+        Insert: {
+          ano: number
+          categoria: string
+          created_at?: string
+          data: string
+          id?: string
+          id_transacao: string
+          mes: number
+          preco_unitario: number
+          produto: string
+          quantidade: number
+          receita_total: number
+          regiao: string
+        }
+        Update: {
+          ano?: number
+          categoria?: string
+          created_at?: string
+          data?: string
+          id?: string
+          id_transacao?: string
+          mes?: number
+          preco_unitario?: number
+          produto?: string
+          quantidade?: number
+          receita_total?: number
+          regiao?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
