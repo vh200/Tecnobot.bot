@@ -15,7 +15,7 @@ const Index = () => {
             </span>
           </div>
           <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            Tencobot Analista de Vendas
+            Tecnobot Analista de Vendas
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Bot Analítico da Alpha Insights - Análise inteligente de dados de vendas mensais com IA
@@ -65,7 +65,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="mt-16 text-center text-sm text-muted-foreground space-y-2">
-          <p className="font-semibold">Alpha Insights - Tencobot Analista de Vendas</p>
+          <p className="font-semibold">Alpha Insights - Tecnobot Analista de Vendas</p>
           <p>
             Análise inteligente de dados de vendas • Insights em tempo real • Gemini 2.5-Pro
           </p>

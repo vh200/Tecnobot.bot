@@ -67,7 +67,7 @@ export const ChatInterface = () => {
       <div className="bg-gradient-to-r from-primary to-secondary p-4">
         <h2 className="text-xl font-bold text-white flex items-center gap-2">
           <Bot className="h-6 w-6" />
-          Tencobot - Analista de Vendas Alpha Insights
+          Tecnobot - Analista de Vendas Alpha Insights
         </h2>
         <p className="text-sm text-white/80 mt-1">
           Analisando dados de vendas integrados ao sistema
