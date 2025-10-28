@@ -1,7 +1,10 @@
 import { ChatInterface } from "@/components/ChatInterface";
+import { DataImport } from "@/components/DataImport";
 import { BarChart3, TrendingUp, Target, Database } from "lucide-react";
+import { useState } from "react";
 
 const Index = () => {
+  const [dataImported, setDataImported] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
@@ -56,12 +59,19 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Main Content - Chat Full Width */}
-        <div className="max-w-6xl mx-auto">
-          <div className="h-[700px]">
-            <ChatInterface />
-          </div>
+        {/* Data Import */}
+        <div className="mb-12 max-w-2xl mx-auto">
+          <DataImport onImportComplete={() => setDataImported(true)} />
         </div>
+
+        {/* Main Content - Chat Full Width */}
+        {dataImported && (
+          <div className="max-w-6xl mx-auto">
+            <div className="h-[700px]">
+              <ChatInterface />
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <footer className="mt-16 text-center text-sm text-muted-foreground space-y-2">
