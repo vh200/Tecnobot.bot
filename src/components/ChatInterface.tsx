@@ -40,7 +40,39 @@ export const ChatInterface = () => {
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        // Tratamento especial para erros específicos
+        if (error.message && error.message.includes("Créditos insuficientes")) {
+          toast.error("💳 Créditos esgotados! Adicione créditos no Lovable workspace para continuar usando o Tecnobot.");
+          const errorMessage: Message = {
+            role: "assistant",
+            content: "Ops! Parece que os créditos de IA acabaram. 😅 Entre em contato com o administrador para adicionar mais créditos ao workspace Lovable.",
+          };
+          setMessages((prev) => [...prev, errorMessage]);
+          return;
+        }
+        if (error.message && error.message.includes("Limite de requisições")) {
+          toast.error("⏱️ Muitas requisições! Aguarde um momento antes de tentar novamente.");
+          const errorMessage: Message = {
+            role: "assistant",
+            content: "Calma aí, parceiro! 🏃‍♂️💨 Muitas perguntas de uma vez. Aguarde alguns segundos e vamos continuar nossa análise!",
+          };
+          setMessages((prev) => [...prev, errorMessage]);
+          return;
+        }
+        throw error;
+      }
+
+      if (data.error) {
+        // Erro retornado pela edge function
+        toast.error(data.error);
+        const errorMessage: Message = {
+          role: "assistant",
+          content: `❌ ${data.error}`,
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+        return;
+      }
 
       const assistantMessage: Message = {
         role: "assistant",
@@ -50,6 +82,11 @@ export const ChatInterface = () => {
     } catch (error: any) {
       console.error("Error:", error);
       toast.error(error.message || "Erro ao processar mensagem");
+      const errorMessage: Message = {
+        role: "assistant",
+        content: "Desculpe, ocorreu um erro ao processar sua mensagem. 😔 Tente novamente em alguns instantes!",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
