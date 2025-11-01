@@ -41,9 +41,13 @@ export const ChatInterface = () => {
       });
 
       if (error) {
-        // Tratamento especial para erros específicos
-        if (error.message && error.message.includes("Créditos insuficientes")) {
-          toast.error("💳 Créditos esgotados! Adicione créditos no Lovable workspace para continuar usando o Tecnobot.");
+        // Captura erros HTTP específicos
+        const errorMsg = error.message || "";
+        const errorContext = (error as any).context;
+        
+        // Erro 402 - Créditos insuficientes
+        if (errorContext?.status === 402 || errorMsg.includes("402") || errorMsg.includes("Créditos insuficientes")) {
+          toast.error("💳 Créditos esgotados! Adicione créditos no workspace Lovable para continuar usando o Tecnobot.");
           const errorMessage: Message = {
             role: "assistant",
             content: "Ops! Parece que os créditos de IA acabaram. 😅 Entre em contato com o administrador para adicionar mais créditos ao workspace Lovable.",
@@ -51,7 +55,9 @@ export const ChatInterface = () => {
           setMessages((prev) => [...prev, errorMessage]);
           return;
         }
-        if (error.message && error.message.includes("Limite de requisições")) {
+        
+        // Erro 429 - Rate limit
+        if (errorContext?.status === 429 || errorMsg.includes("429") || errorMsg.includes("Limite de requisições")) {
           toast.error("⏱️ Muitas requisições! Aguarde um momento antes de tentar novamente.");
           const errorMessage: Message = {
             role: "assistant",
@@ -60,6 +66,7 @@ export const ChatInterface = () => {
           setMessages((prev) => [...prev, errorMessage]);
           return;
         }
+        
         throw error;
       }
 
