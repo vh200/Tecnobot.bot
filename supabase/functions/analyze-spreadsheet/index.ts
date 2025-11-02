@@ -21,10 +21,11 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
     
-    // Buscar dados de vendas do banco
+    // Buscar dados de vendas do banco (todos os registros, sem limite)
     const { data: vendas, error: vendasError } = await supabase
       .from('vendas')
       .select('*')
+      .range(0, 2999) // Buscar até 3000 registros para garantir todos os dados
       .order('data', { ascending: true });
     
     if (vendasError) {
